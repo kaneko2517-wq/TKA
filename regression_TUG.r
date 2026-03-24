@@ -11,7 +11,7 @@ df <- read_excel(input_xlsx, sheet = 1)
 names(df) <- trimws(names(df))
 
 target <- "TUG_post"
-features <- c("年齢（歳）","sex","BMI","affected_post%weight","PCS_sum_pre","ROM_flex_post","symptoms_post")
+features <- c("年齢（歳）","sex","BMI","affected_post%weight","PCS_sum_pre","ROM_flex_post","symptoms _post")
 
 df2 <- df %>%
   mutate(across(all_of(c(target, features)), ~ as.numeric(.))) %>%
@@ -19,4 +19,6 @@ df2 <- df %>%
 
 fmla <- as.formula(paste0("`", target, "` ~ ",
                          paste(sprintf("`%s`", features), collapse = " + ")))
-                         
+model <- lm(fmla, data = df2)
+print(summary(model))
+print(confint(model))
