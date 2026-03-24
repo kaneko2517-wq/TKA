@@ -1,18 +1,19 @@
 # regression_kss_pcs.R
+
+# パッケージの読込
 library(readr)
 library(dplyr)
 library(tidyr)    # drop_na用
 library(broom)
 library(readxl)
-install.packages("readxl", repos = "https://cran.r-project.org")
 input_xlsx <- "main.xlsx"
 output_csv <- "TKA術前・術後データ_scored_regression_R.csv"
 
 df <- read_excel(input_xlsx, sheet = 1)
 names(df) <- trimws(names(df))
 
-target <- "expectation_post"
-features <- c("年齢（歳）","BMI","affected_post%weight","PCS_sum_post","TUG_post")
+target <- "symptoms _post"
+features <- c("年齢（歳）","sex","BMI","affected_post%weight","PCS_sum_pre","ROM_flex_post")
 
 # TUG_post #activity_post
 # 欠落列チェック
@@ -36,3 +37,4 @@ df2 <- df2 %>%
 
 write_csv(df2, output_csv)
 cat("出力:", output_csv, "\n")
+
