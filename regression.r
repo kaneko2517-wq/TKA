@@ -4,17 +4,16 @@ library(dplyr)
 library(tidyr)    # drop_na用
 library(broom)
 library(readxl)
-install.packages("readxl", repos = "https://cran.r-project.org")
 input_xlsx <- "main.xlsx"
-output_csv <- "TKA術前・術後データ_scored_regression_R.csv"
+output_csv <- "TKA術前・術後データ_scored_regression_R2.csv"
 
 df <- read_excel(input_xlsx, sheet = 1)
 names(df) <- trimws(names(df))
 
-target <- "expectation_post"
-features <- c("年齢（歳）","BMI","affected_post%weight","PCS_sum_post","TUG_post")
+target <- "satisfaction_post"
+features <- c("年齢（歳）","BMI","sex","affected_post%weight","PCS_sum_pre","TUG_post","ROM_flex_post")
 
-# TUG_post #activity_post
+# TUG_post #activity_post＃satisfaction_post＃symptoms _post
 # 欠落列チェック
 missing_cols <- setdiff(c(target, features), names(df))
 if (length(missing_cols) > 0) stop("足りない列: ", paste(missing_cols, collapse=", "))
