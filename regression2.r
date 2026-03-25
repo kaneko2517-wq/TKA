@@ -12,7 +12,7 @@ output_csv <- "TKA術前・術後データ_scored_regression_R2.csv"
 df <- read_excel(input_xlsx, sheet = 1)
 names(df) <- trimws(names(df))
 
-target <-"satisfaction_post"
+target <-"expectation_post"
 features <- c("年齢（歳）","sex","BMI","affected_post%weight","PCS_sum_post","ROM_flex_post", "TUG_post")
 
 # TUG_post #activity_post＃satisfaction_post＃symptoms _post
